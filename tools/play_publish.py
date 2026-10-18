@@ -33,7 +33,7 @@ if cmd in('all','listing'):
     imgs=[('icon','icon-512.png'),('featureGraphic','feature-graphic-1024x500.png')]+[('phoneScreenshots',f) for f in sorted(glob.glob(S+'screenshot-*.png'))]
     for t,_ in {'icon':0,'featureGraphic':0,'phoneScreenshots':0}.items(): call('DELETE',E+f'/listings/en-US/{t}')
     for t,f in imgs:
-        p=f if f.startswith('/') else S+f
+        p=f if f.startswith(('/',S)) else S+f
         r=call('POST',EU+f'/listings/en-US/{t}?uploadType=media',open(p,'rb').read(),'image/png',raw=True); print(t,p.split('/')[-1],r.get('image',{}).get('id'))
     print('details',call('PATCH',E+'/details',{'contactEmail':'info@calecutech.com','contactWebsite':'https://calecutech.com/bhagavatham/','defaultLanguage':'en-US'}))
 if cmd in('all','bundle'):
